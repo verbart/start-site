@@ -1,0 +1,34 @@
+{
+  "name": "landing-start",
+  "version": "0.0.1",
+  "author": "Artem Verbat",
+  "homepage": "https://github.com/verbart/landing-start#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verbart/landing-start.git"
+  },
+  "bugs": {
+    "url": "https://github.com/verbart/landing-start/issues"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/gulp",
+    "build": "NODE_ENV=production ./node_modules/.bin/gulp build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "browser-sync": "^2.18.2",
+    "del": "^2.2.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-if": "^2.0.2",
+    "gulp-postcss": "^6.2.0",
+    "gulp-pug": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-stylus": "^2.6.0",
+    "gulp-util": "^3.0.7"
+  },
+  "dependencies": {
+    "font-awesome": "^4.7.0"
+  }
+}
