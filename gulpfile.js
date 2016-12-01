@@ -10,6 +10,11 @@ const rename = require('gulp-rename');
 const del = require('del');
 const gutil = require('gulp-util');
 const pug = require('gulp-pug');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const uglify = require('gulp-uglify');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -21,7 +26,7 @@ gulp.task('views', function buildHTML() {
             gutil.log(gutil.colors.red('Error: ' + error.message));
             this.emit('end');
         })
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('styles', function () {
@@ -42,22 +47,39 @@ gulp.task('styles', function () {
         .pipe(gulpIf(isDevelopment, sourcemaps.write()))
         .pipe(gulpIf(!isDevelopment, cleanCSS()))
         .pipe(rename('style.css'))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./dist/css'))
+});
+
+gulp.task('scripts', function() {
+    return browserify({
+        entries: './src/app.js',
+        debug: isDevelopment
+    })
+        .transform(babelify, {presets: ['es2015']})
+        .bundle()
+        .on('error', function(error) {
+            gutil.log(gutil.colors.red('Error: ' + error), '\n', error.codeFrame);
+            this.emit('end');
+        })
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(gulpIf(!isDevelopment, uglify()))
+        .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('copy:fonts', function () {
     return gulp.src([
         './node_modules/font-awesome/fonts/**/*.*'
     ])
-        .pipe(gulp.dest('./public/fonts'));
+        .pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('copy:images', function () {
-    return gulp.src('./src/**/*.{png,jpg,gif,svg}')
+    return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg}')
         .pipe(rename(function (path) {
             path.dirname = '';
         }))
-        .pipe(gulp.dest('./public/images'));
+        .pipe(gulp.dest('./dist/images'));
 });
 
 gulp.task('watch', function () {
@@ -67,15 +89,15 @@ gulp.task('watch', function () {
 
 gulp.task('serve', function () {
     browserSync.init({
-        server: './public',
+        server: './dist',
         port: 8080
     });
 
-    browserSync.watch('./public/**/*.*').on('change', browserSync.reload);
+    browserSync.watch('./dist/**/*.*').on('change', browserSync.reload);
 });
 
 gulp.task('clean', function () {
-    return del('./public')
+    return del('./dist')
 });
 
 gulp.task('build', gulp.series(
@@ -83,6 +105,7 @@ gulp.task('build', gulp.series(
     gulp.parallel(
         'views',
         'styles',
+        'scripts',
         'copy:fonts',
         'copy:images'
     )));

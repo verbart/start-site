@@ -1,7 +1,3 @@
-node_modules/
-*.map
-*.log
-*~
-.idea/
-
-/public
+node_modules
+.idea
+/dist
