@@ -86,7 +86,7 @@ gulp.task('images', function () {
 
 gulp.task('watch', function () {
     gulp.watch('./src/**/*.pug', gulp.series('views'));
-    gulp.watch('./src/**/*.styl', gulp.series('styles'));
+    gulp.watch('./src/**/*.{css,styl}', gulp.series('styles'));
 });
 
 gulp.task('serve', function () {
