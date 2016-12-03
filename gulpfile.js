@@ -15,6 +15,7 @@ const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -74,8 +75,9 @@ gulp.task('copy:fonts', function () {
         .pipe(gulp.dest('./dist/fonts'));
 });
 
-gulp.task('copy:images', function () {
+gulp.task('images', function () {
     return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg}')
+        .pipe(imagemin())
         .pipe(rename(function (path) {
             path.dirname = '';
         }))
@@ -107,7 +109,7 @@ gulp.task('build', gulp.series(
         'styles',
         'scripts',
         'copy:fonts',
-        'copy:images'
+        'images'
     )));
 
 gulp.task('default', gulp.series(
