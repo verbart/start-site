@@ -68,7 +68,7 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('copy:fonts', function () {
+gulp.task('fonts', function () {
     return gulp.src([
         './node_modules/font-awesome/fonts/**/*.*'
     ])
@@ -87,6 +87,7 @@ gulp.task('images', function () {
 gulp.task('watch', function () {
     gulp.watch('./src/**/*.pug', gulp.series('views'));
     gulp.watch('./src/**/*.{css,styl}', gulp.series('styles'));
+    gulp.watch('./src/**/*.js', gulp.series('scripts'));
 });
 
 gulp.task('serve', function () {
@@ -108,7 +109,7 @@ gulp.task('build', gulp.series(
         'views',
         'styles',
         'scripts',
-        'copy:fonts',
+        'fonts',
         'images'
     )));
 
