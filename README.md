@@ -7,7 +7,7 @@
   * `Pug (Jade)` - for preprocessing views
   * `Stylus` - for preprocessing styles
   * `PostCSS Autoprefixer` - for adding prefixes to css properties
-  * `Imagemin` - for optimize images
+  * `Tinypng` - for optimize images
   * `BrowserSync` - dev-server for live-coding
   * `Gulp 4` - for build it
 * **Libs**

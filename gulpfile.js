@@ -15,7 +15,7 @@ const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
-const imagemin = require('gulp-imagemin');
+const tinypng = require('gulp-tinypng-nokey');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -77,7 +77,7 @@ gulp.task('fonts', function () {
 
 gulp.task('images', function () {
     return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg}')
-        .pipe(imagemin())
+        .pipe(gulpIf(!isDevelopment, tinypng()))
         .pipe(rename(function (path) {
             path.dirname = '';
         }))
