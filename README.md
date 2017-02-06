@@ -11,7 +11,7 @@
 ### Contains
 
 - **Tools**
-  - `Babel + Browserify + Uglify` - for build scripts
+  - `Webpack + Babel` - for build scripts
   - `Pug (Jade)` - for preprocessing views
   - `Stylus` - for preprocessing styles
   - `PostCSS Autoprefixer` - for adding prefixes to css properties
@@ -33,4 +33,4 @@
 
 ### Build
 
-* Run `npm run build` for building.
+- Run `npm run build` for building.

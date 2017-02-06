@@ -10,12 +10,8 @@ const rename = require('gulp-rename');
 const del = require('del');
 const gutil = require('gulp-util');
 const pug = require('gulp-pug');
-const babelify = require('babelify');
-const browserify = require('browserify');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const uglify = require('gulp-uglify');
 const tinypng = require('gulp-tinypng-nokey');
+const webpack = require('webpack');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -51,21 +47,19 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./dist/css'))
 });
 
-gulp.task('scripts', function() {
-    return browserify({
-        entries: './src/app.js',
-        debug: isDevelopment
-    })
-        .transform(babelify, {presets: ['es2015']})
-        .bundle()
-        .on('error', function(error) {
-            gutil.log(gutil.colors.red('Error: ' + error), '\n', error.codeFrame);
-            this.emit('end');
-        })
-        .pipe(source('bundle.js'))
-        .pipe(buffer())
-        .pipe(gulpIf(!isDevelopment, uglify()))
-        .pipe(gulp.dest('./dist/js'));
+gulp.task('scripts', function(done) {
+    return webpack(require('./webpack.config.js'), function(err, stats) {
+        if(err) throw new gutil.PluginError('webpack', err);
+
+        gutil.log('[scripts]', stats.toString({
+            colors: gutil.colors.supportsColor,
+            chunks: false,
+            hash: false,
+            version: false
+        }));
+
+        done();
+    });
 });
 
 gulp.task('fonts', function () {
@@ -78,9 +72,7 @@ gulp.task('fonts', function () {
 gulp.task('images', function () {
     return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg}')
         .pipe(gulpIf(!isDevelopment, tinypng()))
-        .pipe(rename(function (path) {
-            path.dirname = '';
-        }))
+        .pipe(rename(path => {path.dirname = '';}))
         .pipe(gulp.dest('./dist/images'));
 });
 
@@ -92,6 +84,8 @@ gulp.task('watch', function () {
 
 gulp.task('serve', function () {
     browserSync.init({
+        // proxy: 'example.com',
+        // files: 'public/**/*.*',
         server: './dist',
         port: 8080
     });
