@@ -1,10 +1,13 @@
 const webpack = require('webpack');
+const path = require('path');
+
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
 
 module.exports = {
     entry: './src/app.js',
     output: {
-        path: './dist/js',
+        path: path.resolve(__dirname, 'dist/js'),
         filename: 'bundle.js'
     },
     devtool: 'source-map',
