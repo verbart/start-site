@@ -1,14 +1,14 @@
 {
-  "name": "landing-start",
+  "name": "start-site",
   "version": "0.0.2",
   "author": "Artem Verbat",
-  "homepage": "https://github.com/verbart/landing-start#readme",
+  "homepage": "https://github.com/verbart/start-site#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/verbart/landing-start.git"
+    "url": "git+https://github.com/verbart/start-site.git"
   },
   "bugs": {
-    "url": "https://github.com/verbart/landing-start/issues"
+    "url": "https://github.com/verbart/start-site/issues"
   },
   "scripts": {
     "start": "NODE_ENV=development ./node_modules/.bin/gulp",

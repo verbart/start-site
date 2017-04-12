@@ -1,4 +1,4 @@
-# Boilerplate for quick start landing-site building
+# Boilerplate for quick start site building
 
 ### Examples of projects based on it
 
