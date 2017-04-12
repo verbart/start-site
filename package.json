@@ -1,6 +1,6 @@
 {
   "name": "landing-start",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Artem Verbat",
   "homepage": "https://github.com/verbart/landing-start#readme",
   "repository": {
@@ -31,6 +31,8 @@
     "gulp-stylus": "^2.6.0",
     "gulp-tinypng-nokey": "^1.0.4",
     "gulp-util": "^3.0.7",
+    "gulp.spritesmith": "^6.4.0",
+    "vinyl-buffer": "^1.0.0",
     "webpack": "^2.2.1"
   },
   "dependencies": {
