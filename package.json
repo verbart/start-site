@@ -11,8 +11,8 @@
     "url": "https://github.com/verbart/start-site/issues"
   },
   "scripts": {
-    "start": "NODE_ENV=development ./node_modules/.bin/gulp",
-    "build": "NODE_ENV=production ./node_modules/.bin/gulp build"
+    "start": "gulp",
+    "build": "NODE_ENV=production gulp build"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
