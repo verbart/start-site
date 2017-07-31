@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const buffer = require('vinyl-buffer');
 const postcss = require('gulp-postcss');
 const stylus = require('gulp-stylus');
-const cleanCSS = require('gulp-clean-css');
+const csso = require('gulp-csso');
 const autoprefixer = require('autoprefixer');
 const browserSync = require('browser-sync').create();
 const gulpIf = require('gulp-if');
@@ -44,7 +44,7 @@ gulp.task('styles', function () {
       })
     ])))
     .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-    .pipe(gulpIf(!isDevelopment, cleanCSS()))
+    .pipe(gulpIf(!isDevelopment, csso()))
     .pipe(rename('style.css'))
     .pipe(gulp.dest('./public/css'))
 });
