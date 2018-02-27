@@ -1,0 +1,11 @@
+mixin checkbox(data)
+  - data = data || {};
+  - data.id = attributes.id = attributes.id || data.id || Math.random();
+
+  .checkbox
+    input.checkbox__input(type='checkbox')&attributes(attributes)
+    label.checkbox__icon(for=data.id)
+
+    if block
+      label.checkbox__label(for=data.id)
+        block

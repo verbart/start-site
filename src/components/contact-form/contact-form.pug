@@ -1,0 +1,26 @@
+include ../icon/icon
+include ../checkbox/checkbox
+
+
+.container.text_center.padding_vertical
+  form.form.contactForm
+    h1
+      +icon({icon: 'star'})
+      br
+      | It Works!
+
+    .form__group.margin_bottom_half
+      input.form__input(placeholder='Text field')
+    br
+    .form__group.form__group_lg.margin_bottom_half
+      input.form__input(placeholder='Text field')
+
+    .margin_bottom_half
+      +checkbox(name='confirm') Just checkbox
+
+    button.button.margin_bottom_half
+      i.fa.fa-smile-o
+      | &nbsp;Button
+    br
+    button.button.button_lg Large Button&nbsp;
+      i.fa.fa-check

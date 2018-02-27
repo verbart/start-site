@@ -1,0 +1,28 @@
+//@import '../../../../node_modules/slick-carousel/slick/slick.css'
+//@import '../../../../node_modules/slick-carousel/slick/slick-theme.css'
+
+.slick
+  &-loading &-list
+    background #fff center center no-repeat
+  &-dots
+    position relative
+    bottom auto
+    margin-top 3rem
+    text-align left
+    font-size 0
+    @media (max-width 768px)
+      margin-top 1.5rem
+    li
+      width 1rem
+      height 1rem
+      border-radius 50%
+      border .063rem solid #fff
+      //background rgba(#616161, 50%)
+      &.slick-active
+        background #fff
+      button:before
+        content ''
+        font-family inherit
+
+.slick-dotted.slick-slider
+  margin-bottom 0
