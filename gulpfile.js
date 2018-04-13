@@ -85,7 +85,7 @@ gulp.task('svgSymbols', function () {
     .pipe(svgmin())
     .pipe(svgSymbols({
       templates: ['default-svg'],
-      className: '.icon_%f'
+      class: '.icon_%f'
     }))
     .pipe(gulp.dest('./public'));
 });
