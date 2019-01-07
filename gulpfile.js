@@ -57,9 +57,7 @@ gulp.task('scripts', function () {
   return gulp.src('./src/app.js')
     .pipe(bro({
       debug: isDevelopment,
-      transform: [
-        babelify.configure({ presets: ['es2015'] }),
-      ]
+      transform: [ babelify ]
     }))
     .pipe(gulpIf(!isDevelopment, uglify()))
     .pipe(rename('bundle.js'))
