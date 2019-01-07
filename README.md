@@ -13,12 +13,13 @@
 - **Tools**
   - `gulp-bro + babelify` - for build scripts
   - `Pug` - for preprocessing views
-  - `Stylus` - for preprocessing styles
+  - `Sass (scss)` - for preprocessing styles
   - `PostCSS Autoprefixer` - for adding prefixes to css properties
   - `Tinypng` - for optimize images
   - `gulp-svg-symbols` - for easy work with SVG
   - `BrowserSync` - dev-server for live-coding
   - `Gulp 4` - for build it
+
 - **Libs**
   - `Fontawesome` - awesome icons pack
   - `Bootstrap 4` - for layout grid only

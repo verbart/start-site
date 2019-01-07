@@ -1,0 +1,47 @@
+.checkbox {
+  display: inline-flex;
+
+  &__input {
+    display: none;
+
+    ~ .checkbox__icon {
+      position: relative;
+      display: inline-block;
+      width: 1.25rem;
+      height: 1.25rem;
+      box-shadow: inset 0.063rem 0.063rem 0.188rem rgba(0, 4, 2, 0.77);
+      border: 0.063rem solid #c3c3c3;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        left: 1px;
+        right: 1px;
+        border-radius: 4px;
+      }
+    }
+
+    &:checked ~ .checkbox__icon {
+      box-shadow: none;
+
+      &:before {
+        background: #606060;
+      }
+    }
+  }
+
+  &__icon label {
+    cursor: pointer;
+  }
+
+  &__label {
+    padding-left: 6px;
+    line-height: 1.2;
+  }
+}

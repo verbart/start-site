@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const buffer = require('vinyl-buffer');
 const postcss = require('gulp-postcss');
-const stylus = require('gulp-stylus');
+const sass = require('gulp-sass');
 const csso = require('gulp-csso');
 const autoprefixer = require('autoprefixer');
 const browserSync = require('browser-sync').create();
@@ -21,6 +21,7 @@ const uglify = require('gulp-uglify');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+sass.compiler = require('node-sass');
 
 gulp.task('views', function buildHTML() {
   return gulp.src('./src/index.pug')
@@ -33,24 +34,18 @@ gulp.task('views', function buildHTML() {
 });
 
 gulp.task('styles', function () {
-  return gulp.src('./src/app.styl')
+  return gulp.src('./src/app.scss')
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(stylus({
-      'include css': true
-    })
-    .on('error', function(error) {
-      gutil.log(gutil.colors.red('Error: ' + error.message));
-      this.emit('end');
-    }))
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulpIf(!isDevelopment, postcss([
       autoprefixer({
         browsers: ['> 5%', 'ff > 14']
       })
     ])))
-    .pipe(gulpIf(isDevelopment, sourcemaps.write()))
     .pipe(gulpIf(!isDevelopment, csso()))
     .pipe(rename('style.css'))
-    .pipe(gulp.dest('./public/css'))
+    .pipe(gulpIf(isDevelopment, sourcemaps.write()))
+    .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('scripts', function () {
@@ -102,7 +97,7 @@ gulp.task('watch', function () {
   gulp.watch('./src/db/*.json', gulp.series('db'));
   gulp.watch('./src/**/*.pug', gulp.series('views'));
   gulp.watch('./src/**/*.js', gulp.series('scripts'));
-  gulp.watch('./src/**/*.{css,styl}', gulp.series('styles'));
+  gulp.watch('./src/**/*.{css,scss}', gulp.series('styles'));
   gulp.watch('./src/assets/images/**/*.*', gulp.series('images'));
   gulp.watch('./src/assets/images/svg/**/*.svg', gulp.series('svgSymbols'));
 });
