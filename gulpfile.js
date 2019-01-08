@@ -75,7 +75,11 @@ gulp.task('images', function () {
 
 gulp.task('svgSymbols', function () {
   return gulp.src('./src/assets/images/svg/**/*.svg')
-    .pipe(svgmin())
+    .pipe(svgmin({
+      plugins: [{
+        removeViewBox: false
+      }]
+    }))
     .pipe(svgSymbols({
       templates: ['default-svg'],
       class: '.icon_%f'
